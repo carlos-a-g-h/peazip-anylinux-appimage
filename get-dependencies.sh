@@ -48,7 +48,7 @@ then
 	#mv -v "$EXTRACTED" peazip-gtk
 	#rmdir extracted
 
-	dnf in -y xorg-x11-server-Xvfb patchelf zstd strace libX11 gdk-pixbuf2 fontconfig libXrender libXinerama fastfetch
+	dnf in -y xorg-x11-server-Xvfb patchelf zstd libX11 gdk-pixbuf2 fontconfig libXrender libXinerama fastfetch zsync strace binutils
 	dnf in -y qt6-qtbase qt6-qtbase-gui systemd-libs
 	# dnf in -y gtk2 cairo pango
 fi
