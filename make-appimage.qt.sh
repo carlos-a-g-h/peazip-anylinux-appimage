@@ -34,7 +34,7 @@ cp -va peazip-qt/* "$APPDIR"/bin/
 
 # Deploy dependencies
 # quick-sharun ./peazip-qt/peazip ./peazip-qt/pea ./peazip-qt/libQt6Pas.*
-./quick-sharun.sh ./peazip-qt/*
+./quick-sharun.sh ./peazip-qt/res/* ./peazip-qt/peazip ./peazip-qt/pea ./peazip-qt/libQt6Pas.*
 
 # Additional changes can be done in between here
 

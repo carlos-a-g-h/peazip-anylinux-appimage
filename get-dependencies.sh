@@ -41,13 +41,11 @@ then
 	tar -xvf "$TARFILE_QT" -C extracted
 	EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 	mv -v "$EXTRACTED" peazip-qt
-	rmdir extracted
-
-	#tar -xvf "$TARFILE_GTK" -C extracted
+	rmdir extracpeazip ./	#tar -xvf "$TARFILE_GTK" -C extracted
 	#EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 	#mv -v "$EXTRACTED" peazip-gtk
 
-	dnf in -y xorg-x11-server-Xvfb patchelf zstd strace libX11 gdk-pixbuf2 fontconfig libXrender libXinerama
+	dnf in -y xorg-x11-server-Xvfb patchelf zstd strace libX11 gdk-pixbuf2 fontconfig libXrender libXinerama fastfetch
 	dnf in -y qt6-qtbase qt6-qtbase-gui systemd-libs
 	# dnf in -y gtk2 cairo pango
 fi
