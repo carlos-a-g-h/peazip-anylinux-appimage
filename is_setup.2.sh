@@ -226,8 +226,8 @@ then
 
 fi
 
-# Config
-if [ $COPY_CONFIG -eq 1 ]
+# Config (if the app has one)
+if [ $COPY_CONFIG -eq 1 ] && [ -d "$APPDIR"/_config ]
 then
 
 	AE=0
