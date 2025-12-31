@@ -48,7 +48,7 @@ then
 	#mv -v "$EXTRACTED" peazip-gtk
 	#rmdir extracted
 
-	dnf in -y xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat
-	dnf in -y glew qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui systemd-libs bzip2-libs libbrotli libglvnd libxml2 xz-libs libcap libXau libglvnd-egl libxkbcommon libglvnd-glx libglvnd-opengl libpng double-conversion pcre2 libXext graphite2 libicu libgomp
-	dnf in -y gtk2 gtk2-themes cairo pango
+	dnf in -y xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat \
+	glew qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui systemd-libs bzip2-libs libbrotli libglvnd libxml2 xz-libs libcap libXau libglvnd-egl libxkbcommon libglvnd-glx libglvnd-opengl libpng double-conversion pcre2 libXext graphite2 libicu libgomp
+	# gtk2 gtk2-themes cairo pango
 fi
