@@ -2,14 +2,14 @@
 
 set -eu
 
-ARCH=$(uname -m)
+ARCH="$(uname -m)"
 VERSION="v$(sed -n 1p version.txt)"
 
 UBID="$1"
 UBID_SHORT="${UBID:0:8}"
 
-NAME="PeaZip-QT"
-APPIMAGE_STEM="$NAME"_"$VERSION"_"$UBID_SHORT"_anylinux_"$ARCH"
+NAME="PeaZip"
+APPIMAGE_STEM="$NAME""-Qt"_"$VERSION"_"$UBID_SHORT"_anylinux_"$ARCH"
 export ARCH VERSION
 export OUTPATH=./dist
 #export ADD_HOOKS="self-updater.bg.hook"
@@ -18,11 +18,12 @@ export ICON="peazip-qt/res/share/icons/peazip.png"
 export OUTNAME="$APPIMAGE_STEM".AppImage
 export DESKTOP="peazip.desktop"
 
+export DEPLOY_LOCALE=1
 export DEPLOY_OPENGL=1
 export DEPLOY_VULKAN=0
 export DEPLOY_GEGL=0
-export DEPLOY_PULSE=1
-export DEPLOY_PIPEWIRE=1
+export DEPLOY_PULSE=0
+export DEPLOY_PIPEWIRE=0
 export DEPLOY_GTK=0
 export DEPLOY_QT=1
 export DEPLOY_SDL=1
@@ -51,7 +52,7 @@ echo "$UBID" > "$APPDIR"/_details/commit.txt
 echo "$(date)" > "$APPDIR"/_details/date.txt
 rpm -qa > "$APPDIR"/_details/packages.txt
 sed -n 2p version.txt > "$APPDIR"/_details/upstream.txt
-fastfetch > "$APPDIR"/_details/system.txt
+fastfetch|sed -e 's/Local IP.*//' -e 's/Locale.*//' -e 's/Battery.*//' -e 's/Disk.*//' -e 's/Swap.*//' > "$APPDIR"/_details/system.txt
 
 # Copy Internal scripts
 # mkdir -vp "$APPDIR"/bin
