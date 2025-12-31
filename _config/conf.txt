@@ -26,7 +26,7 @@ default.txt
 0
 
 [Initial dir for file/archive browser]
-/HOME_DIRECTORY
+/
 
 [default archiving format]
 18
