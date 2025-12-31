@@ -3,13 +3,16 @@ concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 on:
-  schedule:
-    - cron: "0 7 1/21 * *" # We default to rebuilding every 21 days, change this to your liking
+  #schedule:
+  #  - cron: "0 7 1/21 * *" # We default to rebuilding every 21 days, change this to your liking
+  push:
+    branches:
+      - main
   workflow_dispatch: {}
 
 jobs:
   build:
-    name: "${{ matrix.name }} (${{ matrix.arch }})"
+    name: "${{ matrix.name }} (${{ matrix.fedora }})"
     runs-on: ${{ matrix.runs-on }}
     strategy:
       matrix:
@@ -17,23 +20,21 @@ jobs:
           - runs-on: ubuntu-latest
             name: Build AppImage
             arch: x86_64
-          # comment out these 3 lines if aarch64 is not wanted
-          - runs-on: ubuntu-24.04-arm
-            name: Build AppImage
-            arch: aarch64
-    container: ghcr.io/pkgforge-dev/archlinux:latest
+          #- runs-on: ubuntu-24.04-arm
+          #  name: Build AppImage
+          #  arch: aarch64
+    container: fedora:latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Preparing Container
-        uses: pkgforge-dev/anylinux-setup-action@8872fabe63f9a00b35e25b2f46da62a05afc9a7d # v1
+      - name: Pulling repo
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Install Dependencies
-        run: /bin/sh ./get-dependencies.sh
+        run: /bin/bash ./get-dependencies.sh
       - name: Make AppImage
-        run: /bin/sh ./make-appimage.sh
+        run: /bin/bash ./make-appimage.qt.sh "${{ github.sha }}"
       - name: Upload artifact
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
-          name: AppImage-${{ matrix.arch }}
+          name: AppImage-${{ matrix.fedora }}
           path: dist
 
   release:
