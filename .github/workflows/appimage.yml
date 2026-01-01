@@ -31,8 +31,8 @@ jobs:
         run: /bin/bash ./get-dependencies.sh
       - name: Make AppImage for Qt
         run: /bin/bash ./make-appimage.qt.sh "${{ github.sha }}"
-      #- name: Make AppImage for GTK
-      #  run: /bin/bash ./make-appimage.qt.sh "${{ github.sha }}"
+      - name: Make AppImage for GTK
+        run: /bin/bash ./make-appimage.gtk.sh "${{ github.sha }}"
       - name: Upload artifact
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
