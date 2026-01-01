@@ -26,7 +26,7 @@ default.txt
 0
 
 [Initial dir for file/archive browser]
-/
+HOME_DIRECTORY
 
 [default archiving format]
 18
@@ -206,7 +206,7 @@ Deflate
 0
 
 [desktop path]
-/root/
+HOME_DIRECTORY/
 
 [scripts encoding, legacy parameter (now always UTF-8) ]
 0
@@ -215,7 +215,7 @@ Deflate
 1
 
 [last output path]
-/root/
+HOME_DIRECTORY/
 
 [height of the navigation's splitter]
 220
