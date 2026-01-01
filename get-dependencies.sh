@@ -44,11 +44,11 @@ then
 	tar -xvf "$TARFILE_QT" -C extracted
 	EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 	mv -v "$EXTRACTED" peazip-qt
-	rmdir -v extracted
 
 	tar -xvf "$TARFILE_GTK" -C extracted
 	EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 	mv -v "$EXTRACTED" peazip-gtk
+
 	rmdir -v extracted
 
 	dnf in -y xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat \
