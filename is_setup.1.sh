@@ -7,9 +7,9 @@ set -eu
 
 MAIN_BIN="/usr/bin/peazip"
 
-CONFIG_DIR="$HOME""/.config/snes9x"
+CONFIG_DIR="$HOME""/.config/peazip"
 
-DESKTOP="snes9x-gtk.desktop"
+DESKTOP="peazip.desktop"
 DESKTOP_EXEC=$(basename "$MAIN_BIN")
 PATH_ICON="/usr/share/icons/peazip.png"
 declare -a LBINARIES=(
@@ -17,5 +17,5 @@ declare -a LBINARIES=(
 )
 
 function additional_config_tasks() {
-	echo "WIP (where tf does peazip stores its config nowadays?)"
+	sed -i "s:HOME_DIRECTORY:$HOME:" "$CONFIG_DIR"/conf.txt
 }
