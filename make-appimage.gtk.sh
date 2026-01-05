@@ -19,12 +19,13 @@ export OUTNAME="$APPIMAGE_STEM".AppImage
 export DESKTOP="peazip.desktop"
 
 export DEPLOY_LOCALE=1
-export DEPLOY_OPENGL=1
+export DEPLOY_OPENGL=0
 export DEPLOY_VULKAN=0
 export DEPLOY_GEGL=0
 export DEPLOY_PULSE=0
 export DEPLOY_PIPEWIRE=0
 export DEPLOY_GTK=1
+export GTK_DIR="/lib64/gtk-2.0/"
 export DEPLOY_GDK=1
 export DEPLOY_QT=0
 export DEPLOY_SDL=0
