@@ -25,6 +25,7 @@ export DEPLOY_GEGL=0
 export DEPLOY_PULSE=0
 export DEPLOY_PIPEWIRE=0
 export DEPLOY_GTK=1
+export DEPLOY_GDK=1
 export DEPLOY_QT=0
 export DEPLOY_SDL=0
 export DEPLOY_GLYCIN=0
@@ -32,6 +33,8 @@ export APPDIR=./appdir-gtk
 
 mkdir -p "$APPDIR"/bin
 cp -va peazip-gtk/* "$APPDIR"/bin/
+rm -vrf "$APPDIR"/bin/res/portable
+rm -vrf "$APPDIR"/bin/res/conf
 
 # Deploy dependencies
 ./quick-sharun.sh ./peazip-gtk/res/* ./peazip-gtk/peazip ./peazip-gtk/pea

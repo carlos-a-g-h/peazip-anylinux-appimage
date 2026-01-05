@@ -25,6 +25,7 @@ export DEPLOY_GEGL=0
 export DEPLOY_PULSE=0
 export DEPLOY_PIPEWIRE=0
 export DEPLOY_GTK=0
+export DEPLOY_GDK=0
 export DEPLOY_QT=1
 export DEPLOY_SDL=1
 export DEPLOY_GLYCIN=0
@@ -32,6 +33,8 @@ export APPDIR=./appdir-qt
 
 mkdir -p "$APPDIR"/bin
 cp -va peazip-qt/* "$APPDIR"/bin/
+rm -vrf "$APPDIR"/bin/res/conf
+rm -vrf "$APPDIR"/bin/res/portable
 
 # Deploy dependencies
 # quick-sharun ./peazip-qt/peazip ./peazip-qt/pea ./peazip-qt/libQt6Pas.*

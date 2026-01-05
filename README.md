@@ -10,7 +10,7 @@
 
 ## About this AppImage
 
-PeaZip does not provide any appimages, they only provide a portable version of PeaZip, but this portable version requires a relatively not so old system, but my system is older than that, so that's why I'm building not just AppImages, but AppImages that RUN EVERYWHERE
+PeaZip does not provide any appimages, they only provide a portable version of PeaZip. However, this portable version requires a relatively new system, but my system is older than that, so that's why I'm building not just AppImages, but AppImages that RUN EVERYWHERE
 
 <details>
   <summary><b><i>IT RUNS ON THIS OLD-ASS DISTRO</i></b></summary>
@@ -20,7 +20,7 @@ PeaZip does not provide any appimages, they only provide a portable version of P
 
 ### Variants/Versions
 
-The variants are based on the RPM package that are available at the download section of PeaZip's website (or github releases)
+The variants are based on the portable variants that are available at the [download section](https://peazip.github.io/peazip-linux.html) of PeaZip's website and/or the [releases](https://github.com/peazip/PeaZip/releases) of the official repository
 
 | Version | Variant name | Status | Description |
 |-|-|-|-|
