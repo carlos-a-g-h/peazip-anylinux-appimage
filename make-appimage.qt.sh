@@ -18,6 +18,7 @@ export ICON="peazip-qt/res/share/icons/peazip.png"
 export OUTNAME="$APPIMAGE_STEM".AppImage
 export DESKTOP="peazip.desktop"
 
+export LIB_DIR="/usr/lib64"
 export DEPLOY_LOCALE=1
 export DEPLOY_OPENGL=1
 export DEPLOY_VULKAN=0
