@@ -62,6 +62,8 @@ fi
 
 # Copy details
 
+ls -l
+
 mkdir -v "$APPDIR"/_details
 echo "$UBID" > "$APPDIR"/_details/commit.txt
 echo "$(date)" > "$APPDIR"/_details/date.txt
@@ -77,7 +79,7 @@ url" >> "$US"
 awk "/peazip_portable/ && /GTK/ && /$VERSION/ && /$ARCH/" sources.txt >> "$US"
 echo "
 sha256" >> "$US"
-sha256sum "$US_FILE" >> "$US"
+sha256sum ./"$US_FILE" >> "$US"
 
 # Copy Internal scripts
 
