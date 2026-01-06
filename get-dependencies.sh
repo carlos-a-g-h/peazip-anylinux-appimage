@@ -78,7 +78,7 @@ then
 		EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 		mv -v "$EXTRACTED" peazip-qt
 
-		dnf -y glew qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
+		dnf in -y glew qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
 
 	fi
 
@@ -89,7 +89,7 @@ then
 		EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 		mv -v "$EXTRACTED" peazip-gtk
 
-		dnf -y gtk2 adwaita-gtk2-theme gtk2-engines cairo pango glycin-libs atk gdk-pixbuf2 gdk-pixbuf2-xlib
+		dnf in -y gtk2 adwaita-gtk2-theme gtk2-engines cairo pango glycin-libs atk gdk-pixbuf2 gdk-pixbuf2-xlib
 
 	fi
 
