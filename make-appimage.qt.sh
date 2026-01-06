@@ -2,8 +2,10 @@
 
 set -eu
 
+EXTR="peazip-qt"
+
 ARCH="$(uname -m)"
-VERSION="v$(sed -n 1p version.txt)"
+VERSION="v$(sed -n 1p sources.txt)"
 
 UBID="$1"
 UBID_SHORT="${UBID:0:8}"
@@ -14,7 +16,7 @@ export ARCH VERSION
 export OUTPATH=./dist
 #export ADD_HOOKS="self-updater.bg.hook"
 #export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
-export ICON="peazip-qt/res/share/icons/peazip.png"
+export ICON="$EXTR""/res/share/icons/peazip.png"
 export OUTNAME="$APPIMAGE_STEM".AppImage
 export DESKTOP="peazip.desktop"
 
@@ -32,18 +34,25 @@ export DEPLOY_SDL=1
 export DEPLOY_GLYCIN=0
 export APPDIR=./appdir-qt
 
+if ! [ -d "$EXTR" ]
+then
+	echo "not found: $EXTR"
+	exit 0
+fi
+
 mkdir -p "$APPDIR"/bin
-cp -va peazip-qt/* "$APPDIR"/bin/
+cp -va "$EXTR"/* "$APPDIR"/bin/
 rm -vrf "$APPDIR"/bin/res/conf
 rm -vrf "$APPDIR"/bin/res/portable
 
 # Deploy dependencies
-# quick-sharun ./peazip-qt/peazip ./peazip-qt/pea ./peazip-qt/libQt6Pas.*
-./quick-sharun.sh ./peazip-qt/res/* ./peazip-qt/peazip ./peazip-qt/pea ./peazip-qt/libQt6Pas.*
+./quick-sharun.sh ./"$APPDIR"/bin/res/* ./"$APPDIR"/bin/peazip ./"$APPDIR"/bin/pea ./"$APPDIR"/bin/libQt6Pas.*
+# ./quick-sharun.sh ./"$EXTR"/res/* ./"$EXTR"/peazip ./"$EXTR"/pea ./"$EXTR"/libQt6Pas.*
 
 # Additional changes can be done in between here
 
 # Copy the config
+
 if [ -d _config ]
 then
 	mkdir -p "$APPDIR"/_config
@@ -51,15 +60,25 @@ then
 fi
 
 # Copy details
+
 mkdir -v "$APPDIR"/_details
 echo "$UBID" > "$APPDIR"/_details/commit.txt
 echo "$(date)" > "$APPDIR"/_details/date.txt
 rpm -qa > "$APPDIR"/_details/packages.txt
-sed -n 2p version.txt > "$APPDIR"/_details/upstream.txt
+
 fastfetch|sed -e 's/Local IP.*//' -e 's/Locale.*//' -e 's/Battery.*//' -e 's/Disk.*//' -e 's/Swap.*//' > "$APPDIR"/_details/system.txt
 
+US_FILE=$(ls|awk "/peazip_portable/ && /QT/ && /$VERSION/ && /$ARCH/")
+US="$APPDIR"/_details/upstream.txt
+touch "$USR"
+echo "
+url" >> "$US"
+awk "/peazip_portable/ && /QT/ && /$VERSION/ && /$ARCH/" sources.txt >> "$US"
+echo "
+sha256" >> "$US"
+sha256sum "$US_FILE" >> "$US"
+
 # Copy Internal scripts
-# mkdir -vp "$APPDIR"/bin
 
 cp -v is_details "$APPDIR"/bin/details
 cp -v is_setup.1.sh "$APPDIR"/bin/setup
