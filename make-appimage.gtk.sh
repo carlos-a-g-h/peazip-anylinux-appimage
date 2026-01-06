@@ -5,7 +5,7 @@ set -eu
 EXTR="peazip-gtk"
 
 ARCH="$(uname -m)"
-VERSION="v$(sed -n 1p version.txt)"
+VERSION="v$(sed -n 1p sources.txt)"
 
 UBID="$1"
 UBID_SHORT="${UBID:0:8}"
