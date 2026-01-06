@@ -71,7 +71,7 @@ fastfetch|sed -e 's/Local IP.*//' -e 's/Locale.*//' -e 's/Battery.*//' -e 's/Dis
 
 US_FILE=$(ls|awk "/peazip_portable/ && /GTK/ && /$VERSION/ && /$ARCH/")
 US="$APPDIR"/_details/upstream.txt
-touch "$USR"
+touch "$US"
 echo "
 url" >> "$US"
 awk "/peazip_portable/ && /GTK/ && /$VERSION/ && /$ARCH/" sources.txt >> "$US"
