@@ -80,6 +80,8 @@ then
 
 		dnf in -y glew qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
 
+		mkdir -vp "appdir-qt/_details"
+
 	fi
 
 	if [ $MAKE_GTK -eq 1 ]
@@ -95,4 +97,24 @@ then
 
 	rmdir -v extracted
 
+fi
+
+# Writting data on "AppDir/_details/" right now
+
+if [ $MAKE_QT -eq 1 ]
+then
+	LOC="appdir-qt/_details"
+	mkdir -vp "$LOC"
+	echo "$URL_PEAZIP_QT" > "$LOC"/upstream.txt
+	md5sum "$TARFILE_QT" > "$LOC"/checksum.md5.txt
+	sha256sum "$TARFILE_QT" > "$LOC"/checksum.sha256.txt
+fi
+
+if [ $MAKE_GTK -eq 1 ]
+then
+	LOC="appdir-gtk/_details"
+	mkdir -vp "$LOC"
+	echo "$URL_PEAZIP_GTK" > "$LOC"/upstream.txt
+	md5sum "$TARFILE_GTK" > "$LOC"/checksum.md5.txt
+	sha256sum "$TARFILE_GTK" > "$LOC"/checksum.sha256.txt
 fi
