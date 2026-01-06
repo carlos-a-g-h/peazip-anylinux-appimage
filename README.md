@@ -14,7 +14,7 @@ PeaZip does not provide any appimages, they only provide a portable version of P
 
 <details>
   <summary><b><i>IT RUNS ON THIS OLD-ASS DISTRO</i></b></summary>
-    <strong>PICTURE GOES HERE, IF YOU DON'T SEE IT, THIS THING IS STILL WIP</strong>
+    <img width="1920" height="1080" alt="2026-01-06-154041_1920x1080_scrot" src="https://github.com/user-attachments/assets/e7be88ab-fd07-413b-9c31-5525f1798617" />
     <strong><i>System: Debian 11, libc6 2.31</i></strong>
 </details>
 
