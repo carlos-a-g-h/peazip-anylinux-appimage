@@ -17,17 +17,17 @@ on:
         default: 'true'
         type: boolean
 
-#      enable_x86_64:
-#        description: 'Enable x86_64 builds'
-#        required: true
-#        default: 'true'
-#        type: boolean
+      #enable_x86_64:
+      #  description: 'Enable x86_64 builds'
+      #  required: true
+      #  default: 'true'
+      #  type: boolean
 
-#      enable_aarch64:
-#        description: 'Enable aarch64 builds'
-#        required: true
-#        default: 'true'
-#        type: boolean
+      #enable_aarch64:
+      #  description: 'Enable aarch64 builds'
+      #  required: true
+      #  default: 'true'
+      #  type: boolean
 
       enable_qt:
         description: 'Enable Qt builds'
@@ -73,7 +73,7 @@ jobs:
           path: dist
 
   release:
-    if: ${{ github.ref_name == 'main' }} && ${{ github.event.inputs.enable_release == 'true' }}
+    if: ${{ github.ref_name == 'main' && github.event.inputs.enable_release == 'true' }}
     needs: [build]
     permissions: write-all
     runs-on: ubuntu-latest
