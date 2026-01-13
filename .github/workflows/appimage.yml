@@ -8,7 +8,38 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: {}
+
+  workflow_dispatch:
+    inputs:
+      enable_release:
+        description: 'Enable release job'
+        required: true
+        default: 'true'
+        type: boolean
+
+#      enable_x86_64:
+#        description: 'Enable x86_64 builds'
+#        required: true
+#        default: 'true'
+#        type: boolean
+
+#      enable_aarch64:
+#        description: 'Enable aarch64 builds'
+#        required: true
+#        default: 'true'
+#        type: boolean
+
+      enable_qt:
+        description: 'Enable Qt builds'
+        required: true
+        default: 'true'
+        type: boolean
+
+      enable_gtk:
+        description: 'Enable GTK builds'
+        required: true
+        default: 'true'
+        type: boolean
 
 jobs:
   build:
@@ -30,8 +61,10 @@ jobs:
       - name: Install Dependencies
         run: /bin/bash ./get-dependencies.sh
       - name: Make AppImage for Qt
+        if: ${{ github.event.inputs.enable_qt == 'true' }}
         run: /bin/bash ./make-appimage.qt.sh "${{ github.sha }}"
       - name: Make AppImage for GTK
+        if: ${{ github.event.inputs.enable_gtk == 'true' }}
         run: /bin/bash ./make-appimage.gtk.sh "${{ github.sha }}"
       - name: Upload artifact
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
@@ -40,7 +73,7 @@ jobs:
           path: dist
 
   release:
-    if: ${{ github.ref_name == 'main' }}
+    if: ${{ github.ref_name == 'main' }} && ${{ github.event.inputs.enable_release == 'true' }}
     needs: [build]
     permissions: write-all
     runs-on: ubuntu-latest
