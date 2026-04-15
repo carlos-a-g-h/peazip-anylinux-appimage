@@ -6,6 +6,10 @@ ARCH=$(uname -m)
 
 VERSION="$(sed -n 1p sources.txt)"
 URL_PEAZIP_QT=$(awk "/peazip_portable/ && /QT/ && /$VERSION/ && /$ARCH/" sources.txt)
+if [ -z "$URL_PEAZIP_QT" ]
+then
+	URL_PEAZIP_QT=$(awk "/peazip_portable/ && /Qt/ && /$VERSION/ && /$ARCH/" sources.txt)
+fi
 URL_PEAZIP_GTK=$(awk "/peazip_portable/ && /GTK/ && /$VERSION/ && /$ARCH/" sources.txt)
 
 URL_SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh"
@@ -14,11 +18,13 @@ MAKE_QT=0
 if ! [ -z "$URL_PEAZIP_QT" ]
 then
 	MAKE_QT=1
+	echo "[!] MAKING QT VARIANT"
 fi
 MAKE_GTK=0
 if ! [ -z "$URL_PEAZIP_GTK" ]
 then
 	MAKE_GTK=1
+	echo "[!] MAKING GTK VARIANT"
 fi
 
 if [ $MAKE_QT -eq 0 ] && [ $MAKE_GTK -eq 0 ]
@@ -62,10 +68,11 @@ fi
 echo "Installing dependencies..."
 echo "--------------------------"
 
-if [ "$VERSION" == "10.8.0" ]
+if [ "$VERSION" == "11.0.0" ] || [ "$VERSION" == "10.8.0" ]
 then
 
 	dnf in -y \
+	gcc \
 	xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat \
 	systemd-libs bzip2-libs libbrotli libglvnd libxml2 xz-libs libcap libXau libglvnd-egl libxkbcommon libglvnd-glx libglvnd-opengl libpng double-conversion pcre2 libXext graphite2 libicu libgomp \
 
