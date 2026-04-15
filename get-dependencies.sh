@@ -68,6 +68,7 @@ if [ "$VERSION" == "11.0.0" ] || [ "$VERSION" == "10.8.0" ]
 then
 
 	dnf in -y \
+	gcc \
 	xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat \
 	systemd-libs bzip2-libs libbrotli libglvnd libxml2 xz-libs libcap libXau libglvnd-egl libxkbcommon libglvnd-glx libglvnd-opengl libpng double-conversion pcre2 libXext graphite2 libicu libgomp \
 
