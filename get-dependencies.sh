@@ -14,11 +14,13 @@ MAKE_QT=0
 if ! [ -z "$URL_PEAZIP_QT" ]
 then
 	MAKE_QT=1
+	echo "[!] MAKING QT VARIANT"
 fi
 MAKE_GTK=0
 if ! [ -z "$URL_PEAZIP_GTK" ]
 then
 	MAKE_GTK=1
+	echo "[!] MAKING GTK VARIANT"
 fi
 
 if [ $MAKE_QT -eq 0 ] && [ $MAKE_GTK -eq 0 ]
