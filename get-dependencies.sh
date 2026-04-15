@@ -64,7 +64,7 @@ fi
 echo "Installing dependencies..."
 echo "--------------------------"
 
-if [ "$VERSION" == "10.8.0" ]
+if [ "$VERSION" == "11.0.0" ] || [ "$VERSION" == "10.8.0" ]
 then
 
 	dnf in -y \
