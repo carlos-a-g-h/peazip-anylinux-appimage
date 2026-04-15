@@ -6,6 +6,10 @@ ARCH=$(uname -m)
 
 VERSION="$(sed -n 1p sources.txt)"
 URL_PEAZIP_QT=$(awk "/peazip_portable/ && /QT/ && /$VERSION/ && /$ARCH/" sources.txt)
+if [ -z "$URL_PEAZIP_QT" ]
+then
+	URL_PEAZIP_QT=$(awk "/peazip_portable/ && /Qt/ && /$VERSION/ && /$ARCH/" sources.txt)
+fi
 URL_PEAZIP_GTK=$(awk "/peazip_portable/ && /GTK/ && /$VERSION/ && /$ARCH/" sources.txt)
 
 URL_SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh"
