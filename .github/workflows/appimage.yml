@@ -60,24 +60,32 @@ jobs:
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Install Dependencies
         run: /bin/bash ./get-dependencies.sh
+
       - name: Make AppImage (Qt)
         if: ${{ github.event.inputs.enable_qt == 'true' }}
         run: /bin/bash ./make-appimage.qt.sh "${{ github.sha }}"
-      - name: Make AppImage (GTK)
-        if: ${{ github.event.inputs.enable_gtk == 'true' }}
-        run: /bin/bash ./make-appimage.gtk.sh "${{ github.sha }}"
       - name: Upload artifact (Qt)
         if: ${{ github.event.inputs.enable_qt == 'true' }}
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: AppImage-Qt-${{ matrix.arch }}
           path: dist
+      - name: Cleanup (Qt)
+        if: ${{ github.event.inputs.enable_qt == 'true' }}
+        run: rm -va dist
+
+      - name: Make AppImage (GTK)
+        if: ${{ github.event.inputs.enable_gtk == 'true' }}
+        run: /bin/bash ./make-appimage.gtk.sh "${{ github.sha }}"
       - name: Upload artifact (Gtk)
         if: ${{ github.event.inputs.enable_gtk == 'true' }}
         uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: AppImage-Gtk-${{ matrix.arch }}
           path: dist
+      - name: Cleanup (Gtk)
+        if: ${{ github.event.inputs.enable_gtk == 'true' }}
+        run: rm -va dist
 
   release:
     if: ${{ github.ref_name == 'main' && github.event.inputs.enable_release == 'true' }}
