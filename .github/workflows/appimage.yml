@@ -72,7 +72,7 @@ jobs:
           path: dist
       - name: Cleanup (Qt)
         if: ${{ github.event.inputs.enable_qt == 'true' }}
-        run: rm -va dist
+        run: rm -vrf dist
 
       - name: Make AppImage (GTK)
         if: ${{ github.event.inputs.enable_gtk == 'true' }}
@@ -85,7 +85,7 @@ jobs:
           path: dist
       - name: Cleanup (Gtk)
         if: ${{ github.event.inputs.enable_gtk == 'true' }}
-        run: rm -va dist
+        run: rm -vrf dist
 
   release:
     if: ${{ github.ref_name == 'main' && github.event.inputs.enable_release == 'true' }}
