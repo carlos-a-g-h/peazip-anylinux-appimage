@@ -11,7 +11,7 @@ UBID="$1"
 UBID_SHORT="${UBID:0:8}"
 
 NAME="PeaZip"
-APPIMAGE_STEM="$NAME""-GTK"_"$VERSION"_"$UBID_SHORT"_anylinux_"$ARCH"
+APPIMAGE_STEM="$NAME""-Gtk"_"$VERSION"_"$UBID_SHORT"_anylinux_"$ARCH"
 export ARCH VERSION
 export OUTPATH=./dist
 #export ADD_HOOKS="self-updater.bg.hook"
