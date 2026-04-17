@@ -85,7 +85,7 @@ then
 		EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 		mv -v "$EXTRACTED" peazip-qt
 
-		dnf in -y glew qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
+		dnf in -y glew qt6ct qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
 
 		mkdir -vp "appdir-qt/_details"
 
