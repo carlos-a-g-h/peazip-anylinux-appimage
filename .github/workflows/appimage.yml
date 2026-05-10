@@ -11,11 +11,11 @@ on:
 
   workflow_dispatch:
     inputs:
-      enable_release:
-        description: 'Enable release job'
-        required: true
-        default: true
-        type: boolean
+      #enable_release:
+      #  description: 'Enable release job'
+      #  required: true
+      #  default: true
+      #  type: boolean
 
       #enable_x86_64:
       #  description: 'Enable x86_64 builds'
@@ -114,7 +114,7 @@ jobs:
           fi
 
   release:
-    if: ${{ github.ref_name == 'main' && github.event.inputs.enable_release == 'true' }}
+    if: ${{ github.ref_name == 'main' }}
     needs: [build]
     permissions: write-all
     runs-on: ubuntu-latest
