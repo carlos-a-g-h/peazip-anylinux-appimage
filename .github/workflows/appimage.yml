@@ -79,8 +79,13 @@ jobs:
       - name: Cleanup (Qt)
         if: ${{ github.event.inputs.enable_qt == 'true' }}
         run: |
-          rm -vrf dist
-          rm -v PeaZip*.AppImage.squashfs
+          if [ -d dist ]
+          then
+            rm -vrf dist
+            rm -v PeaZip*.AppImage.squashfs
+          else
+            echo "Nothing to delete"
+          fi
 
       - name: Make AppImage (GTK)
         if: ${{ github.event.inputs.enable_gtk == 'true' }}
@@ -100,8 +105,13 @@ jobs:
       - name: Cleanup (Gtk)
         if: ${{ github.event.inputs.enable_gtk == 'true' }}
         run: |
-          rm -vrf dist
-          rm -v PeaZip*.AppImage.squashfs
+          if [ -d dist ]
+          then
+            rm -vrf dist
+            rm -v PeaZip*.AppImage.squashfs
+          else
+            echo "Nothing to delete"
+          fi
 
   release:
     if: ${{ github.ref_name == 'main' && github.event.inputs.enable_release == 'true' }}
