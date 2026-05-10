@@ -82,7 +82,7 @@ jobs:
           if [ -d dist ]
           then
             rm -vrf dist
-            rm -v PeaZip*.AppImage.squashfs
+            rm -v PeaZip-Qt_*.AppImage.squashfs
           else
             echo "Nothing to delete"
           fi
@@ -108,7 +108,7 @@ jobs:
           if [ -d dist ]
           then
             rm -vrf dist
-            rm -v PeaZip*.AppImage.squashfs
+            rm -v PeaZip-Gtk_*.AppImage.squashfs
           else
             echo "Nothing to delete"
           fi
