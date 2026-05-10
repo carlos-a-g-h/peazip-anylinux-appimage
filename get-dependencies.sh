@@ -5,14 +5,14 @@ set -eux
 ARCH=$(uname -m)
 
 VERSION="$(sed -n 1p sources.txt)"
-URL_PEAZIP_QT=$(awk "/peazip_portable/ && /QT/ && /$VERSION/ && /$ARCH/" sources.txt)
+URL_PEAZIP_QT=$(awk "/https/ && /peazip_portable/ && /QT/ && /$VERSION/ && /$ARCH/" sources.txt)
 if [ -z "$URL_PEAZIP_QT" ]
 then
-	URL_PEAZIP_QT=$(awk "/peazip_portable/ && /Qt/ && /$VERSION/ && /$ARCH/" sources.txt)
+	URL_PEAZIP_QT=$(awk "/https/ && /peazip_portable/ && /Qt/ && /$VERSION/ && /$ARCH/" sources.txt)
 fi
-URL_PEAZIP_GTK=$(awk "/peazip_portable/ && /GTK/ && /$VERSION/ && /$ARCH/" sources.txt)
+URL_PEAZIP_GTK=$(awk "/https/ &&/peazip_portable/ && /GTK/ && /$VERSION/ && /$ARCH/" sources.txt)
 
-URL_SHARUN="https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh"
+URL_SHARUN=$(awk "/https/ && /quick-sharun.sh/" sources.txt)
 
 MAKE_QT=0
 if ! [ -z "$URL_PEAZIP_QT" ]
@@ -38,7 +38,8 @@ echo "----------------------"
 
 dnf update -y
 
-dnf in -y wget
+dnf in -y \
+	gcc wget squashfs-tools
 
 FILENAME=$(basename "${URL_SHARUN:7}")
 if ! [ -f $FILENAME ]
@@ -71,10 +72,9 @@ echo "--------------------------"
 if [ "$VERSION" == "11.0.0" ] || [ "$VERSION" == "10.8.0" ]
 then
 
-	dnf in -y \
-	gcc \
-	xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat \
-	systemd-libs bzip2-libs libbrotli libglvnd libxml2 xz-libs libcap libXau libglvnd-egl libxkbcommon libglvnd-glx libglvnd-opengl libpng double-conversion pcre2 libXext graphite2 libicu libgomp \
+	dnf in -y --skip-unavailable \
+		xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat \
+		systemd-libs bzip2-libs libbrotli libglvnd libxml2 xz-libs libcap libXau libglvnd-egl libxkbcommon libglvnd-glx libglvnd-opengl libpng double-conversion pcre2 libXext graphite2 libicu libgomp \
 
 	mkdir -vp extracted
 
@@ -85,7 +85,8 @@ then
 		EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 		mv -v "$EXTRACTED" peazip-qt
 
-		dnf in -y glew qt6ct qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
+		dnf in -y --skip-unavailable \
+			glew qt6ct qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
 
 		mkdir -vp "appdir-qt/_details"
 
@@ -98,7 +99,9 @@ then
 		EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 		mv -v "$EXTRACTED" peazip-gtk
 
-		dnf in -y gtk2 adwaita-gtk2-theme gtk2-engines cairo pango glycin-libs atk gdk-pixbuf2 gdk-pixbuf2-xlib
+		# this line sometimes fail, only god knows why
+		dnf in -y --skip-unavailable \
+			gtk2 adwaita-gtk2-theme gtk2-engines cairo pango glycin-libs atk gdk-pixbuf2 gdk-pixbuf2-xlib
 
 	fi
 

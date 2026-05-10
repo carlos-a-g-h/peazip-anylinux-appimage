@@ -70,9 +70,22 @@ jobs:
         with:
           name: AppImage-Qt-${{ matrix.arch }}
           path: dist
+      - name: Upload artifact (Qt) (SQUASHFS)
+        if: ${{ github.event.inputs.enable_qt == 'true' }}
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: AppDir-Qt-${{ matrix.arch }}
+          path: PeaZip*.AppImage.squashfs
       - name: Cleanup (Qt)
         if: ${{ github.event.inputs.enable_qt == 'true' }}
-        run: rm -vrf dist
+        run: |
+          if [ -d dist ]
+          then
+            rm -vrf dist
+            rm -v PeaZip-Qt_*.AppImage.squashfs
+          else
+            echo "Nothing to delete"
+          fi
 
       - name: Make AppImage (GTK)
         if: ${{ github.event.inputs.enable_gtk == 'true' }}
@@ -83,9 +96,22 @@ jobs:
         with:
           name: AppImage-Gtk-${{ matrix.arch }}
           path: dist
+      - name: Upload artifact (Gtk) (SQUASHFS)
+        if: ${{ github.event.inputs.enable_gtk == 'true' }}
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+        with:
+          name: AppDir-Gtk-${{ matrix.arch }}
+          path: PeaZip*.AppImage.squashfs
       - name: Cleanup (Gtk)
         if: ${{ github.event.inputs.enable_gtk == 'true' }}
-        run: rm -vrf dist
+        run: |
+          if [ -d dist ]
+          then
+            rm -vrf dist
+            rm -v PeaZip-Gtk_*.AppImage.squashfs
+          else
+            echo "Nothing to delete"
+          fi
 
   release:
     if: ${{ github.ref_name == 'main' && github.event.inputs.enable_release == 'true' }}
@@ -93,9 +119,15 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+      - name: Download artifact (AppImage)
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:
           pattern: AppImage-*
           merge-multiple: true
-      - name: Release AppImage
+      - name: Download artifact (AppDir)
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          pattern: AppDir-*
+          merge-multiple: true
+      - name: Ready To Release
         uses: pkgforge-dev/make-stable-appimage-release@4ed3d48ccb065352b6e6c0db6d39885b201c54a0 #v1.1
