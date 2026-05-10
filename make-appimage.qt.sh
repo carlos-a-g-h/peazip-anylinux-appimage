@@ -67,19 +67,8 @@ ls -l
 mkdir -vp "$APPDIR"/_details
 echo "$UBID" > "$APPDIR"/_details/commit.txt
 echo "$(date)" > "$APPDIR"/_details/date.txt
-rpm -qa > "$APPDIR"/_details/packages.txt
-
-fastfetch|sed -e 's/Local IP.*//' -e 's/Locale.*//' -e 's/Battery.*//' -e 's/Disk.*//' -e 's/Swap.*//' > "$APPDIR"/_details/system.txt
-
-#US_FILE=$(ls|awk "/peazip_portable/ && /QT/ && /$ARCH/"|sed -n 1p)
-#US="$APPDIR"/_details/upstream.txt
-#touch "$US"
-#echo "
-#url" >> "$US"
-#awk "/peazip_portable/ && /QT/ && /$VERSION/ && /$ARCH/" sources.txt >> "$US"
-#echo "
-#sha256" >> "$US"
-#sha256sum ./"$US_FILE" >> "$US"
+rpm -qa > "$APPDIR"/_details/system_packages.txt
+fastfetch|sed -e 's/Local IP.*//' -e 's/Locale.*//' -e 's/Battery.*//' -e 's/Disk.*//' -e 's/Swap.*//' > "$APPDIR"/_details/system_info.txt
 
 # Copy Internal scripts
 
@@ -92,3 +81,6 @@ chmod +x "$APPDIR"/bin/setup
 
 # Turn AppDir into AppImage
 ./quick-sharun.sh --make-appimage
+
+# Turn AppDir into SQUASHFS
+mksquashfs "$APPDIR" "$APPIMAGE_STEM".AppImage.squashfs -comp xz
