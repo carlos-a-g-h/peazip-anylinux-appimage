@@ -1,11 +1,14 @@
 11.0.0
 
-# 11.0.0
+# Quick Sharun Script
+https://raw.githubusercontent.com/pkgforge-dev/Anylinux-AppImages/refs/heads/main/useful-tools/quick-sharun.sh
+
+# PeaZip 11.0.0
 https://github.com/peazip/PeaZip/releases/download/11.0.0/peazip_portable-11.0.0.LINUX.Qt6.x86_64.tar.gz
 https://github.com/peazip/PeaZip/releases/download/11.0.0/peazip_portable-11.0.0.LINUX.GTK2.x86_64.tar.gz
 https://github.com/peazip/PeaZip/releases/download/11.0.0/peazip_portable-11.0.0.LINUX.GTK2.aarch64.tar.gz
 
-# 10.8.0
+# PeaZip 10.8.0
 https://github.com/peazip/PeaZip/releases/download/10.8.0/peazip_portable-10.8.0.LINUX.QT6.x86_64.tar.gz
 https://github.com/peazip/PeaZip/releases/download/10.8.0/peazip_portable-10.8.0.LINUX.GTK2.x86_64.tar.gz
 https://github.com/peazip/PeaZip/releases/download/10.8.0/peazip_portable-10.8.0.LINUX.GTK2.aarch64.tar.gz
