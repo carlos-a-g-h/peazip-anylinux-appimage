@@ -100,7 +100,7 @@ then
 		mv -v "$EXTRACTED" peazip-gtk
 
 		# this line sometimes fail, only god knows why
-		dnf in -y \
+		dnf in -y --skip-unavailable \
 			gtk2 adwaita-gtk2-theme gtk2-engines cairo pango glycin-libs atk gdk-pixbuf2 gdk-pixbuf2-xlib
 
 	fi
