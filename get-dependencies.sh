@@ -38,7 +38,8 @@ echo "----------------------"
 
 dnf update -y
 
-dnf in -y gcc wget squashfs-tools
+dnf in -y \
+	gcc wget squashfs-tools
 
 FILENAME=$(basename "${URL_SHARUN:7}")
 if ! [ -f $FILENAME ]
@@ -71,9 +72,9 @@ echo "--------------------------"
 if [ "$VERSION" == "11.0.0" ] || [ "$VERSION" == "10.8.0" ]
 then
 
-	dnf in -y \
-	xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat \
-	systemd-libs bzip2-libs libbrotli libglvnd libxml2 xz-libs libcap libXau libglvnd-egl libxkbcommon libglvnd-glx libglvnd-opengl libpng double-conversion pcre2 libXext graphite2 libicu libgomp \
+	dnf in -y --skip-unavailable \
+		xorg-x11-server-Xvfb patchelf zstd libX11 libX11-xcb xcb-util fontconfig libXrender libXinerama fastfetch zsync strace binutils zlib-ng-compat \
+		systemd-libs bzip2-libs libbrotli libglvnd libxml2 xz-libs libcap libXau libglvnd-egl libxkbcommon libglvnd-glx libglvnd-opengl libpng double-conversion pcre2 libXext graphite2 libicu libgomp \
 
 	mkdir -vp extracted
 
@@ -84,7 +85,8 @@ then
 		EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 		mv -v "$EXTRACTED" peazip-qt
 
-		dnf in -y glew qt6ct qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
+		dnf in -y --skip-unavailable \
+			glew qt6ct qt6pas qt6-filesystem qt6-qttranslations qt6-qtbase qt6-qtbase-gui
 
 		mkdir -vp "appdir-qt/_details"
 
@@ -97,7 +99,9 @@ then
 		EXTRACTED="extracted/""$(ls extracted/|sed -n 1p)"
 		mv -v "$EXTRACTED" peazip-gtk
 
-		dnf in -y gtk2 adwaita-gtk2-theme gtk2-engines cairo pango glycin-libs atk gdk-pixbuf2 gdk-pixbuf2-xlib
+		# this line sometimes fail, only god knows why
+		dnf in -y \
+			gtk2 adwaita-gtk2-theme gtk2-engines cairo pango glycin-libs atk gdk-pixbuf2 gdk-pixbuf2-xlib
 
 	fi
 
