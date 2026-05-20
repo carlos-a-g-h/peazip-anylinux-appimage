@@ -10,7 +10,7 @@
 
 ## About this AppImage
 
-PeaZip [does not provide any appimages](https://github.com/peazip/PeaZip/releases) , they only provide portable veriants of PeaZip. However, these variants do not run on older systems, so that's why I'm building not just AppImages, but AppImages that RUN EVERYWHERE
+PeaZip [does not provide any appimages](https://github.com/peazip/PeaZip/releases) , they only provide portable variants of PeaZip. However, these variants do not run on older systems, so that's why I'm building not just AppImages, but AppImages that RUN EVERYWHERE
 
 <details>
   <summary><b><i>IT RUNS ON THIS OLD-ASS DISTRO</i></b></summary>
@@ -24,8 +24,8 @@ The variants are based on the portable variants that are available at the [downl
 
 | Version | Variant name | Status | Description |
 |-|-|-|-|
-| Any | QT | WIP | Qt variant |
-| Any | GTK | WIP | GTK variant |
+| Any | QT | Ok | Qt variant |
+| Any | GTK | Ok | GTK variant |
 
 ### Internal scripts and programs
 
