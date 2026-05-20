@@ -5,13 +5,13 @@ set -eu
 EXTR="peazip-qt"
 
 ARCH="$(uname -m)"
-VERSION="v$(sed -n 1p sources.txt)"
+VERSION="$(sed -n 1p sources.txt)"
 
 UBID="$1"
 UBID_SHORT="${UBID:0:8}"
 
 NAME="PeaZip"
-APPIMAGE_STEM="$NAME""-Qt"_"$VERSION"_"$UBID_SHORT"_anylinux_"$ARCH"
+APPIMAGE_STEM="$NAME""-Qt"_v"$VERSION"_"$UBID_SHORT"_anylinux_"$ARCH"
 export ARCH VERSION
 export OUTPATH=./dist
 #export ADD_HOOKS="self-updater.bg.hook"
