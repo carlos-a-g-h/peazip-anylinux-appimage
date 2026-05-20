@@ -78,6 +78,9 @@ cat is_setup.2.sh >> "$APPDIR"/bin/setup
 chmod +x "$APPDIR"/bin/details
 chmod +x "$APPDIR"/bin/setup
 
+# Write Name
+echo "$APPIMAGE_STEM" > AppDir/bin/details/name.txt
+
 # Turn AppDir into AppImage
 ./quick-sharun.sh --make-appimage
 
