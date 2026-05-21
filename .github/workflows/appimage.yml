@@ -23,11 +23,11 @@ on:
       #  default: 'true'
       #  type: boolean
 
-      #enable_aarch64:
-      #  description: 'Enable aarch64 builds'
-      #  required: true
-      #  default: 'true'
-      #  type: boolean
+      enable_aarch64:
+        description: 'Enable aarch64 builds'
+        required: true
+        default: true
+        type: boolean
 
       enable_qt:
         description: 'Enable Qt builds'
@@ -51,9 +51,13 @@ jobs:
           - runs-on: ubuntu-latest
             name: Build AppImage
             arch: x86_64
+            arch_enabled: true
           - runs-on: ubuntu-24.04-arm
             name: Build AppImage
             arch: aarch64
+            arch_enabled: ${{ github.event.inputs.enable_aarch64 == 'true' }}
+
+    if: matrix.arch_enabled == "true"
     container: fedora:latest
     steps:
       - name: Pulling repo
