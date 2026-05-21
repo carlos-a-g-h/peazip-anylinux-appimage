@@ -6,8 +6,6 @@
 
 [![CI Build Status](https://github.com//carlos-a-g-h/peazip-anylinux-appimage/actions/workflows/appimage.yml/badge.svg)](https://github.com/carlos-a-g-h/peazip-anylinux-appimage/releases/latest)
 
-* [Latest Stable Release](https://github.com/carlos-a-g-h/peazip-anylinux-appimage/releases/latest)
-
 ## About this AppImage
 
 PeaZip [does not provide any appimages](https://github.com/peazip/PeaZip/releases) , they only provide portable variants of PeaZip. However, these variants do not run on older systems, so that's why I'm building not just AppImages, but AppImages that RUN EVERYWHERE
