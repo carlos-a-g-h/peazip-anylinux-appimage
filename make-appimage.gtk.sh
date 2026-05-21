@@ -79,7 +79,7 @@ chmod +x "$APPDIR"/bin/details
 chmod +x "$APPDIR"/bin/setup
 
 # Write Name
-echo "$APPIMAGE_STEM" > AppDir/_details/name.txt
+echo "$APPIMAGE_STEM" > "$APPDIR"/_details/name.txt
 
 # Turn AppDir into AppImage
 ./quick-sharun.sh --make-appimage
