@@ -252,7 +252,8 @@ then
 fi
 
 # Config
-if [[ $CONFIG_DIR == "/" ]]
+# if [[ $CONFIG_DIR == "/" ]]
+if [ -z $CONFIG_DIR ] || [[ $CONFIG_DIR == "/" ]]
 then
 	COPY_CONFIG=0
 	echo "$MSG_NOT Config ignored (no config?)"
