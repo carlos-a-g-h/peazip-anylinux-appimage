@@ -5,13 +5,13 @@ set -eu
 EXTR="peazip-gtk"
 
 ARCH="$(uname -m)"
-VERSION="v$(sed -n 1p sources.txt)"
+VERSION="$(sed -n 1p sources.txt)"
 
 UBID="$1"
 UBID_SHORT="${UBID:0:8}"
 
 NAME="PeaZip"
-APPIMAGE_STEM="$NAME""-Gtk"_"$VERSION"_"$UBID_SHORT"_anylinux_"$ARCH"
+APPIMAGE_STEM="$NAME""-Gtk"_v"$VERSION"_"$UBID_SHORT"_anylinux_"$ARCH"
 export ARCH VERSION
 export OUTPATH=./dist
 #export ADD_HOOKS="self-updater.bg.hook"
@@ -77,6 +77,9 @@ cat is_setup.2.sh >> "$APPDIR"/bin/setup
 
 chmod +x "$APPDIR"/bin/details
 chmod +x "$APPDIR"/bin/setup
+
+# Write Name
+echo "$APPIMAGE_STEM" > "$APPDIR"/_details/name.txt
 
 # Turn AppDir into AppImage
 ./quick-sharun.sh --make-appimage

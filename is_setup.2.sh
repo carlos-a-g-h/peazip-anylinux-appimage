@@ -45,10 +45,15 @@ MSG_NOT="[ ! ]"
 MSG_USE_FORCE="Run again with --force"
 
 INSTALL=0
+
 COPY_CONFIG=1
+
 MAKE_LINKS=1
+
 MAKE_DESKTOP=1
+
 OVERWRITE=0
+
 declare -a ARGUMENTS=(
 	"--install"
 	"--no-config"
@@ -102,10 +107,18 @@ do
 	fi
 done
 
-echo "
-$MSG_NOT AppImage path: $(realpath -e "$URUNTIME")
-$MSG_NOT Mounted path: $(realpath -e "$APPDIR")
-"
+if [ -z "$APPDIR" ]
+then
+	"$MSG_NOT APPDIR env var not found!"
+	exit 1
+fi
+
+NO_AIMG=0
+if [ -z "$URUNTIME" ]
+then
+	echo "$MSG_NOT URUNTIME env var not found (?)"
+	NO_AIMG=1
+fi
 
 if ! [ $INSTALL -eq 1 ]
 then
@@ -136,7 +149,13 @@ then
 
 		fi
 
-		ln -vsf "$URUNTIME" "$BIN_LINK"
+		if [ $NO_AIMG -eq 1 ]
+		then
+			BIN_NAME=$(basename "$BIN_LINK")
+			URUNTIME="$APPDIR"/bin/"$BIN_NAME"
+			echo "$MSG_NOT faking URUNTIME: $URUNTIME"
+		fi
+		ln -vrsf "$URUNTIME" "$BIN_LINK"
 
 	done
 
@@ -207,6 +226,12 @@ then
 			if [ -f "$MAIN_BIN" ]
 			then
 
+				if [ $NO_AIMG -eq 1 ]
+				then
+					URUNTIME="$MAIN_BIN"
+					echo "$MSG_NOT faking URUNTIME: $URUNTIME"
+				fi
+
 				DESTINATION=$(readlink "$MAIN_BIN")
 				if ! [ "$DESTINATION" == "$URUNTIME" ]
 				then
@@ -226,8 +251,14 @@ then
 
 fi
 
-# Config (if the app has one)
-if [ $COPY_CONFIG -eq 1 ] && [ -d "$APPDIR"/_config ]
+# Config
+# if [[ $CONFIG_DIR == "/" ]]
+if [ -z $CONFIG_DIR ] || [[ $CONFIG_DIR == "/" ]]
+then
+	COPY_CONFIG=0
+	echo "$MSG_NOT Config ignored (no config?)"
+fi
+if [ $COPY_CONFIG -eq 1 ]
 then
 
 	AE=0
